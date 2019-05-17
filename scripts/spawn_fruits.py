@@ -19,7 +19,7 @@ def spawn_fruits(name,x,y):
 	initial_pose.position.y = y
 	initial_pose.position.z = 0.5
         path = os.environ['HOME']
-        f = open(path+'/catkin_ws/src/spawn_fruits/models/crop/fruit/model.sdf','r')
+        f = open(path+'/catkin_ws/src/spawn_models_gazebo/models/crop/fruit/model.sdf','r')
         sdff = f.read()
         spawn_model = rospy.ServiceProxy('gazebo/spawn_sdf_model', SpawnModel)
         spawn_model(name, sdff, "robotos_name_space", initial_pose, "world")
