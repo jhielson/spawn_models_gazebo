@@ -17,7 +17,7 @@ def spawn_fruits(name,x,y):
 	initial_pose = Pose()
 	initial_pose.position.x = x
 	initial_pose.position.y = y
-	initial_pose.position.z = 0.5
+	initial_pose.position.z = 0.8
         path = os.environ['HOME']
         f = open(path+'/catkin_ws/src/spawn_models_gazebo/models/crop/fruit/model.sdf','r')
         sdff = f.read()
@@ -28,24 +28,32 @@ def spawn_fruits(name,x,y):
         print "Service call failed: %s"%e
 
 def select_crop(x,y,i):
-    total = int(random.randrange(0,10))
+    total = int(random.randrange(1,5))
     for t in range(i, i+total):
         name = 'fruit'+str(t)
-        crop_x = int(x)
-        crop_y = int(y)
-        spawn_x = int(random.randrange(crop_x-13,crop_x+13))
-        spawn_y = int(random.randrange(crop_y-2,crop_y+2))
+        crop_x = x
+        crop_y = y
+        spawn_x = random.uniform(crop_x-13,crop_x+13)
+        spawn_y = random.uniform(crop_y-0,crop_y+0)
     	spawn_fruits(name,spawn_x,spawn_y)
     return (i+total)
 
 if __name__ == "__main__":
     
-    x = [-36.61,-36.61,-36.61,-36.61,-36.61,-36.61,-36.61,2.77,2.77,
-          2.77,2.77,2.77,2.77,35.29,35.29,35.29,35.29,35.29,35.29,35.29]
-    y = [-48.12,-32.03,-16.56,-1.48,13.52,29.37,47.18,-39.20,-23.70,-9.04,7.01,21.14,38.62
-         -48.20,-31.40,-15.93,0.34,15.25,31.75,47.87]
+    x = [-27.85,3.74,35.02]
+    y = [-24.93,-23.00,-24.79]
     seq = 0
-    for t in range(0,19):
-    	seq = select_crop(x[t],y[t],seq)
+    for t in range(0,15):
+    	seq = select_crop(x[0],y[0],seq)
+        y[0] = y[0] + 3.7
+
+    for t in range(0,14):
+        if t != 6:
+            seq = select_crop(x[1],y[1],seq)
+        y[1] = y[1] + 3.7
+
+    for t in range(0,15):
+        seq = select_crop(x[2],y[2],seq)
+        y[2] = y[2] + 3.7
 
 
