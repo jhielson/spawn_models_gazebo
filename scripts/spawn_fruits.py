@@ -28,12 +28,12 @@ def spawn_fruits(name,x,y):
         print "Service call failed: %s"%e
 
 def select_crop(x,y,i):
-    total = int(random.randrange(1,5))
+    total = int(random.randrange(1,15))
     for t in range(i, i+total):
         name = 'fruit'+str(t)
         crop_x = x
         crop_y = y
-        spawn_x = random.uniform(crop_x-13,crop_x+13)
+        spawn_x = random.uniform(crop_x-11,crop_x+11)
         spawn_y = random.uniform(crop_y-0,crop_y+0)
     	spawn_fruits(name,spawn_x,spawn_y)
     return (i+total)
